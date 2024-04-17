@@ -17,3 +17,6 @@ README.html
 CHANGELOG.html
 LICENSE.html
 gemini/.env
+gemini/pb_data/
+gemini/pb_migrations
+gemini/gemini
