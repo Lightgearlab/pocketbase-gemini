@@ -133,15 +133,26 @@ func main() {
 		e.Router.GET("/*", apis.StaticDirectoryHandler(os.DirFS(publicDir), indexFallback))
 
 		e.Router.POST("/ask", func(c echo.Context) error {
-			req := c.FormValue("req")
+			jsonBody := make(map[string]interface{})
+			err := json.NewDecoder(c.Request().Body).Decode(&jsonBody)
+			if err != nil {
+				return c.JSON(http.StatusBadRequest, err)
+			}
+			req := jsonBody["req"].(string)
+			if req == "" {
+				var val []byte = []byte("{\"data\":" + "Empty Request" + "}")
+				return c.JSONBlob(http.StatusBadRequest, val)
+			}
 			resp := loadGemini(req)
 			data, err := json.Marshal(resp.Candidates[0].Content.Parts[0])
 			if err != nil {
 				log.Fatal(err)
 			}
+			// fmt.Println(resp)
 			jsonTemp := string(data)
 			jsonString := strings.Replace(jsonTemp, "```", "", -1)
-			return c.String(http.StatusOK, jsonString)
+			var val []byte = []byte("{\"data\":" + jsonString + "}")
+			return c.JSONBlob(http.StatusOK, []byte(val))
 		}, apis.ActivityLogger(app))
 
 		e.Router.POST("/gemini", func(c echo.Context) error {

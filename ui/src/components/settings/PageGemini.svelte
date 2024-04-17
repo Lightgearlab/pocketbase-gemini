@@ -19,6 +19,8 @@
 
     let originalFormSettings = {};
     let formSettings = {};
+    let formText = "";
+    let resultText = "";
     let isLoading = false;
     let isSaving = false;
     let initialHash = "";
@@ -43,33 +45,28 @@
     }
 
     async function save(text) {
-        if (isSaving || !hasChanges) {
-            return;
-        }
-
         isSaving = true;
-
         try {
-            const res = await fetch("http://localhost:8090/ask", {
+            const res = await fetch("http://127.0.0.1:8090/ask", {
                 method: "POST",
                 body: JSON.stringify({
                     req: text,
                 }),
             });
-
             const json = await res.json();
-            result = JSON.stringify(json);
-
-            addSuccessToast(result);
+            var data = json["data"];
+            resultText = data;
+            //addSuccessToast(data);
         } catch (err) {
             ApiClient.error(err);
         }
-
         isSaving = false;
     }
 
     function init(settings = {}) {
-        formSettings = {};
+        formSettings = {
+            meta: settings?.meta.text || {},
+        };
 
         originalFormSettings = JSON.parse(JSON.stringify(formSettings));
     }
@@ -86,21 +83,28 @@
     </header>
 
     <div class="wrapper">
-        <div class="panel" autocomplete="off" on:submit|preventDefault={save}>
+        <form class="panel" autocomplete="off">
             <div class="flex m-b-sm flex-gap-10">
-                <span class="txt-xl">Gemini AI</span>
+                <span class="txt-xl">Gemini AI Test</span>
             </div>
 
-            <div class="col-lg-6">
+            <div class="row" style="text-align: right;">
                 <Field class="form-field required" name="meta.text" let:uniqueId>
                     <label for={uniqueId}>Text</label>
-                    <input type="text" id={uniqueId} required bind:value={formSettings.meta.text} />
+                    <input type="text" id={uniqueId} required bind:value={formText} />
                 </Field>
+                <button
+                    type="submit"
+                    class:btn-loading={isSaving}
+                    disabled={isSaving}
+                    class="btn btn-secondary"
+                    on:click={() => save(formText)}
+                >
+                    <span class="txt">Send Question</span>
+                </button>
             </div>
             <hr />
-            <button type="submit" class="btn btn-expanded" on:click={() => save(formSettings.meta.text)}>
-                <span class="txt">Send Question</span>
-            </button>
+            <div>{resultText}</div>
             <!-- <div class="grid">
                 <div class="col-lg-6">
                     <Field class="form-field required" name="meta.apikey" let:uniqueId>
@@ -124,6 +128,6 @@
                     <i class="ri-arrow-down-s-line" />
                 {/if}
             </button> -->
-        </div>
+        </form>
     </div>
 </PageWrapper>
