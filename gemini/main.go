@@ -146,7 +146,8 @@ func main() {
 			resp := loadGemini(req)
 			data, err := json.Marshal(resp.Candidates[0].Content.Parts[0])
 			if err != nil {
-				log.Fatal(err)
+				var val []byte = []byte("{\"data\":" + err.Error() + "}")
+				return c.JSONBlob(http.StatusBadRequest, val)
 			}
 			// fmt.Println(resp)
 			jsonTemp := string(data)

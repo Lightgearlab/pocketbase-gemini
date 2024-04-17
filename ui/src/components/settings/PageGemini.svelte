@@ -14,8 +14,9 @@
     import BackupsList from "@/components/settings/BackupsList.svelte";
     import S3Fields from "@/components/settings/S3Fields.svelte";
     import BackupUploadButton from "@/components/settings/BackupUploadButton.svelte";
+    import SvelteMarkdown from "svelte-markdown";
 
-    $pageTitle = "Gemini";
+    $pageTitle = "Gemini AI";
 
     let originalFormSettings = {};
     let formSettings = {};
@@ -85,7 +86,7 @@
     <div class="wrapper">
         <form class="panel" autocomplete="off">
             <div class="flex m-b-sm flex-gap-10">
-                <span class="txt-xl">Gemini AI Test</span>
+                <span class="txt-xl">Text Prompt</span>
             </div>
 
             <div class="row" style="text-align: right;">
@@ -104,30 +105,7 @@
                 </button>
             </div>
             <hr />
-            <div>{resultText}</div>
-            <!-- <div class="grid">
-                <div class="col-lg-6">
-                    <Field class="form-field required" name="meta.apikey" let:uniqueId>
-                        <label for={uniqueId}>API KEY</label>
-                        <input type="text" id={uniqueId} required bind:value={formSettings.meta.apikey} />
-                    </Field>
-                </div>
-            </div> -->
-
-            <!-- <button
-                type="button"
-                class="btn btn-secondary"
-                class:btn-loading={isLoading}
-                disabled={isLoading}
-                on:click={() => (showBackupsSettings = !showBackupsSettings)}
-            >
-                <span class="txt">Backups options</span>
-                {#if showBackupsSettings}
-                    <i class="ri-arrow-up-s-line" />
-                {:else}
-                    <i class="ri-arrow-down-s-line" />
-                {/if}
-            </button> -->
+            <SvelteMarkdown source={resultText} />
         </form>
     </div>
 </PageWrapper>

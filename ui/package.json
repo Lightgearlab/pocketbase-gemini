@@ -17,8 +17,8 @@
     "@codemirror/commands": "^6.0.0",
     "@codemirror/lang-html": "^6.1.0",
     "@codemirror/lang-javascript": "^6.0.2",
-    "@codemirror/lang-sql": "^6.4.0",
     "@codemirror/lang-json": "^6.0.0",
+    "@codemirror/lang-sql": "^6.4.0",
     "@codemirror/language": "^6.0.0",
     "@codemirror/legacy-modes": "^6.0.0",
     "@codemirror/search": "^6.0.0",
@@ -34,5 +34,8 @@
     "svelte-flatpickr": "^3.3.3",
     "svelte-spa-router": "^4.0.0",
     "vite": "^5.0.11"
+  },
+  "dependencies": {
+    "svelte-markdown": "^0.4.1"
   }
 }
