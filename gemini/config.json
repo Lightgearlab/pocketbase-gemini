@@ -1,75 +1,275 @@
 [
 	{
-		"id": "3oldx70btzzhwbii",
-		"name": "items",
-		"type": "base",
-		"system": false,
-		"schema": [
+		"id":"9n1lbzzu3p7d8agk",
+		"name":"patients",
+		"type":"base",
+		"system":false,
+		"schema":[
 			{
-				"system": false,
-				"id": "86km6r0j",
-				"name": "item_name",
-				"type": "text",
-				"required": true,
-				"presentable": true,
-				"unique": false,
-				"options": {}
-			},
-			{
-				"system": false,
-				"id": "oyskrg9q",
-				"name": "description",
-				"type": "text",
-				"required": false,
-				"presentable": true,
-				"unique": false,
-				"options": {}
-			},
-			{
-				"system": false,
-				"id": "b4n0fmlb",
-				"name": "quantity",
-				"type": "number",
-				"required": true,
-				"presentable": true,
-				"unique": false,
-				"options": {
-					"min": 0,
-					"max": null,
-					"noDecimal": false
+				"system":false,
+				"id":"hm108427",
+				"name":"name",
+				"type":"text",
+				"required":true,
+				"presentable":true,
+				"unique":true,
+				"options":{
+					"min":1,
+					"max":255,
+					"pattern":""
 				}
 			},
 			{
-				"system": false,
-				"id": "l74moq4m",
-				"name": "price",
-				"type": "number",
-				"required": true,
-				"presentable": true,
-				"unique": false,
-				"options": {
-					"min": 0,
-					"max": null,
-					"noDecimal": false
+				"system":false,
+				"id":"4t6f7q9i",
+				"name":"age",
+				"type":"number",
+				"required":true,
+				"presentable":true,
+				"unique":false,
+				"options":{
+					"min":0,
+					"max":120,
+					"noDecimal":false
 				}
 			},
 			{
-				"system": false,
-				"id": "8mkbwqiz",
-				"name": "available",
-				"type": "bool",
-				"required": true,
-				"presentable": true,
-				"unique": false,
-				"options": {}
+				"system":false,
+				"id":"sj7g9hvo",
+				"name":"gender",
+				"type":"text",
+				"required":true,
+				"presentable":true,
+				"unique":false,
+				"options":{
+					"min":1,
+					"max":10,
+					"pattern":""
+				}
+			},
+			{
+				"system":false,
+				"id":"30pjuhxm",
+				"name":"address",
+				"type":"text",
+				"required":true,
+				"presentable":true,
+				"unique":false,
+				"options":{
+					"min":1,
+					"max":255,
+					"pattern":""
+				}
+			},
+			{
+				"system":false,
+				"id":"j65e5fby",
+				"name":"phone",
+				"type":"text",
+				"required":true,
+				"presentable":true,
+				"unique":true,
+				"options":{
+					"min":10,
+					"max":15,
+					"pattern":"\\+[0-9]{2}-[0-9]{10}"
+				}
+			},
+			{
+				"system":false,
+				"id":"9i3vwxnx",
+				"name":"email",
+				"type":"text",
+				"required":true,
+				"presentable":true,
+				"unique":true,
+				"options":{
+					"min":1,
+					"max":255,
+					"pattern":"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+				}
+			},
+			{
+				"system":false,
+				"id":"07e086mn",
+				"name":"bloodgroup",
+				"type":"text",
+				"required":true,
+				"presentable":true,
+				"unique":false,
+				"options":{
+					"min":2,
+					"max":3,
+					"pattern":""
+				}
+			},
+			{
+				"system":false,
+				"id":"48wv89ru",
+				"name":"allergies",
+				"type":"text",
+				"required":false,
+				"presentable":true,
+				"unique":false,
+				"options":{
+					"min":0,
+					"max":255,
+					"pattern":""
+				}
+			},
+			{
+				"system":false,
+				"id":"1794v13p",
+				"name":"medications",
+				"type":"text",
+				"required":false,
+				"presentable":true,
+				"unique":false,
+				"options":{
+					"min":0,
+					"max":255,
+					"pattern":""
+				}
+			},
+			{
+				"system":false,
+				"id":"ajx879ni",
+				"name":"notes",
+				"type":"text",
+				"required":false,
+				"presentable":true,
+				"unique":false,
+				"options":{
+					"min":0,
+					"max":255,
+					"pattern":""
+				}
 			}
 		],
-		"indexes": [],
-		"listRule": null,
-		"viewRule": null,
-		"createRule": null,
-		"updateRule": null,
-		"deleteRule": null,
-		"options": {}
-	}
-]
+		"indexes":[],
+		"listRule":null,
+		"viewRule":null,
+		"createRule":null,
+		"updateRule":null,
+		"deleteRule":null,
+		"options":{}
+	},
+	{
+		"id":"083h68232dg8ea",
+		"name":"doctors",
+		"type":"base",
+		"system":false,
+		"schema":[
+			{
+				"system":false,
+				"id":"2sjy4qgo",
+				"name":"name",
+				"type":"text",
+				"required":true,
+				"presentable":true,
+				"unique":true,
+				"options":{
+					"min":1,
+					"max":255,
+					"pattern":""
+				}
+			},
+			{
+				"system":false,
+				"id":"012b9y2x",
+				"name":"age",
+				"type":"number",
+				"required":true,
+				"presentable":true,
+				"unique":false,
+				"options":{
+					"min":18,
+					"max":120,
+					"noDecimal":false
+				}
+			},
+			{
+				"system":false,
+				"id":"dbp54wn2",
+				"name":"gender",
+				"type":"text",
+				"required":true,
+				"presentable":true,
+				"unique":false,
+				"options":{
+					"min":1,
+					"max":10,
+					"pattern":""
+				}
+			},
+			{
+				"system":false,
+				"id":"8f4u7z8s",
+				"name":"specialization",
+				"type":"text",
+				"required":true,
+				"presentable":true,
+				"unique":false,
+				"options":{
+					"min":1,
+					"max":255,
+					"pattern":""
+				}
+			},
+			{
+				"system":false,
+				"id":"1t253m8n",
+				"name":"experience",
+				"type":"number",
+				"required":true,
+				"presentable":true,
+				"unique":false,
+				"options":{
+					"min":0,
+					"max":100,
+					"noDecimal":false
+				}
+			},
+			{
+				"system":false,
+				"id":"p3ei9g4i",
+				"name":"phone",
+				"type":"text",
+				"required":true,
+				"presentable":true,
+				"unique":true,
+				"options":{
+					"min":10,
+					"max":15,
+					"pattern":"\\+[0-9]{2}-[0-9]{10}"
+				}
+			},
+			{
+				"system":false,
+				"id":"2cj0z7mj",
+				"name":"email",
+				"type":"text",
+				"required":true,
+				"presentable":true,
+				"unique":true,
+				"options":{
+					"min":1,
+					"max":255,
+					"pattern":"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+				}
+			}
+		],
+		"indexes":[],
+		"listRule":null,
+		"viewRule":null,
+		"createRule":null,
+		"updateRule":null,
+		"deleteRule":null,
+		"options":{}
+	},
+	{
+		"id":"f5f77853bh2989",
+		"name":"appointments",
+		"type":"base",
+		"system":false,
+		"schema":[

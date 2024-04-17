@@ -157,7 +157,16 @@ func main() {
 		}, apis.ActivityLogger(app))
 
 		e.Router.POST("/gemini", func(c echo.Context) error {
-			req := c.FormValue("req")
+			jsonBody := make(map[string]interface{})
+			err := json.NewDecoder(c.Request().Body).Decode(&jsonBody)
+			if err != nil {
+				return c.JSON(http.StatusBadRequest, err)
+			}
+			req := jsonBody["req"].(string)
+			if req == "" {
+				var val []byte = []byte("{\"data\":" + "Empty Request" + "}")
+				return c.JSONBlob(http.StatusBadRequest, val)
+			}
 			preReq := "you are a pocketbase json configuration generator, create the tables required for this system :  " + req + " below 280 len. The structure of the json should be like below, but please replace < > items with the tables or row accordingly: " + `
 		[
 				{
@@ -222,30 +231,30 @@ func main() {
 									"requireEmail": false', else use '{}'>
 					}
 		]
-. Please remove json keyword in the beginning. Please use lowercase for table name and row name. 
+. Please remove json keyword in the beginning. Please use lowercase for table name and row name. Remove all whitespace.
 
 			`
 			resp := loadGemini(preReq)
 			data, err := json.Marshal(resp.Candidates[0].Content.Parts[0])
 			if err != nil {
-				log.Fatal(err)
+				return c.JSON(http.StatusBadRequest, err)
 			}
 			jsonTemp := string(data)
 			file, err := os.Create("config.json")
 			if err != nil {
-				return err
+				return c.JSON(http.StatusBadRequest, err)
 			}
 			jsonString := strings.Replace(jsonTemp, "```", "", -1)
 			_, er := strconv.Unquote(jsonString)
 			if er != nil {
-				return er
+				return c.JSON(http.StatusBadRequest, er)
 			}
 			//additional wrap json to remove escape slashes
 			var val []byte = []byte("{\"data\":" + jsonString + "}")
 			var wrapper Wrapper
 			err = json.Unmarshal([]byte(val), &wrapper)
 			fmt.Fprintln(file, wrapper.Data)
-			return c.JSON(http.StatusOK, resp)
+			return c.JSON(http.StatusOK, wrapper.Data)
 		}, apis.ActivityLogger(app))
 
 		return nil

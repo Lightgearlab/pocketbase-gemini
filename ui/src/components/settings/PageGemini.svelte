@@ -21,7 +21,9 @@
     let originalFormSettings = {};
     let formSettings = {};
     let formText = "";
+    let formSystemText = "";
     let resultText = "";
+    let resultSystemText = "";
     let isLoading = false;
     let isSaving = false;
     let initialHash = "";
@@ -43,6 +45,27 @@
         }
 
         isLoading = false;
+    }
+
+    async function systemConfig(text) {
+        isSaving = true;
+        try {
+            const res = await fetch("http://127.0.0.1:8090/gemini", {
+                method: "POST",
+                body: JSON.stringify({
+                    req: text,
+                }),
+            });
+            const json = await res.json();
+            console.log(json);
+            // var data = json["Da"];
+            // console.log(data);
+            resultSystemText = json;
+            addSuccessToast("created json config file config.json");
+        } catch (err) {
+            ApiClient.error(err);
+        }
+        isSaving = false;
     }
 
     async function save(text) {
@@ -86,9 +109,45 @@
     <div class="wrapper">
         <form class="panel" autocomplete="off">
             <div class="flex m-b-sm flex-gap-10">
+                <span class="txt-xl">JSON Generator</span>
+            </div>
+            <div class="row" style="text-align: right;">
+                <Field class="form-field required" name="meta.text" let:uniqueId>
+                    <label for={uniqueId}>System</label>
+                    <input type="text" id={uniqueId} required bind:value={formSystemText} />
+                </Field>
+                <button
+                    type="submit"
+                    class:btn-loading={isSaving}
+                    disabled={isSaving}
+                    class="btn btn-secondary"
+                    on:click={() => systemConfig(formSystemText)}
+                >
+                    <span class="txt">Create</span>
+                </button>
+            </div>
+            <hr />
+            <Field class="form-field" name="collections" let:uniqueId>
+                <label for={uniqueId} class="p-b-10">Collections</label>
+                <textarea
+                    id={uniqueId}
+                    class="code"
+                    spellcheck="false"
+                    rows="15"
+                    required
+                    bind:value={resultSystemText}
+                />
+
+                <!-- {#if !!resultSystemText}
+                    <div class="help-block help-block-error">Invalid collections configuration.</div>
+                {/if} -->
+            </Field>
+        </form>
+        <div class="m-20"></div>
+        <form class="panel" autocomplete="off">
+            <div class="flex m-b-sm flex-gap-10">
                 <span class="txt-xl">Text Prompt</span>
             </div>
-
             <div class="row" style="text-align: right;">
                 <Field class="form-field required" name="meta.text" let:uniqueId>
                     <label for={uniqueId}>Text</label>
