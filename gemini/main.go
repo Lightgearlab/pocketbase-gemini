@@ -2,11 +2,13 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"time"
 
@@ -122,29 +124,115 @@ func main() {
 		return nil
 	})
 
+	type Wrapper struct {
+		Data string
+	}
 	app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
 
 		// serves static files from the provided public dir (if exists)
 		e.Router.GET("/*", apis.StaticDirectoryHandler(os.DirFS(publicDir), indexFallback))
 
-		e.Router.GET("/gemini", func(c echo.Context) error {
-			ctx := context.Background()
-			err := godotenv.Load(".env")
-			if err != nil {
-				log.Fatalf("Error loading .env file")
-			}
-			client, err := genai.NewClient(ctx, option.WithAPIKey(os.Getenv("API_KEY")))
+		e.Router.POST("/ask", func(c echo.Context) error {
+			req := c.FormValue("req")
+			resp := loadGemini(req)
+			data, err := json.Marshal(resp.Candidates[0].Content.Parts[0])
 			if err != nil {
 				log.Fatal(err)
 			}
-			defer client.Close()
+			jsonTemp := string(data)
+			jsonString := strings.Replace(jsonTemp, "```", "", -1)
+			return c.String(http.StatusOK, jsonString)
+		}, apis.ActivityLogger(app))
 
-			model := client.GenerativeModel("gemini-pro")
-			resp, err := model.GenerateContent(ctx, genai.Text("Write a short story about a programmer"))
+		e.Router.POST("/gemini", func(c echo.Context) error {
+			req := c.FormValue("req")
+			preReq := "you are a pocketbase json configuration generator, create the tables required for this system :  " + req + " below 280 len. The structure of the json should be like below, but please replace < > items with the tables or row accordingly: " + `
+		[
+				{
+						"id" : "<Random 15 char length Id>",
+						"name": "<Table Name>",
+						"type": "<If need login, use 'auth', if not 'base' >",
+						"system": false,
+						"schema": [
+							{
+								"system": false,
+								"id": "<Random 8 char length Id>",
+								"name": "<Row Name>",
+								"type": "text",
+								"required": false,
+								"presentable": false,
+								"unique": false,
+								"options": {
+									"min": null,
+									"max": null,
+									"pattern": ""
+								}
+							},
+							{
+								"system": false,
+								"id": "uduc0mdq",
+								"name": "<Row Number>",
+								"type": "number",
+								"required": false,
+								"presentable": false,
+								"unique": false,
+								"options": {
+									"min": null,
+									"max": null,
+									"noDecimal": false
+								}
+							},
+							{
+								"system": false,
+								"id": "yt9ccbml",
+								"name": "<Row Boolean>",
+								"type": "bool",
+								"required": false,
+								"presentable": false,
+								"unique": false,
+								"options": {}
+							}
+						],
+						"indexes": [],
+						"listRule": null,
+						"viewRule": null,
+						"createRule": null,
+						"updateRule": null,
+						"deleteRule": null,
+						"options": <If table type is 'auth' , use '"allowEmailAuth": true,
+									"allowOAuth2Auth": true,
+									"allowUsernameAuth": true,
+									"exceptEmailDomains": null,
+									"manageRule": null,
+									"minPasswordLength": 8,
+									"onlyEmailDomains": null,
+									"onlyVerified": false,
+									"requireEmail": false', else use '{}'>
+					}
+		]
+. Please remove json keyword in the beginning. Please use lowercase for table name and row name. 
+
+			`
+			resp := loadGemini(preReq)
+			data, err := json.Marshal(resp.Candidates[0].Content.Parts[0])
 			if err != nil {
 				log.Fatal(err)
 			}
-			//printResponse(resp)
+			jsonTemp := string(data)
+			file, err := os.Create("config.json")
+			if err != nil {
+				return err
+			}
+			jsonString := strings.Replace(jsonTemp, "```", "", -1)
+			_, er := strconv.Unquote(jsonString)
+			if er != nil {
+				return er
+			}
+			//additional wrap json to remove escape slashes
+			var val []byte = []byte("{\"data\":" + jsonString + "}")
+			var wrapper Wrapper
+			err = json.Unmarshal([]byte(val), &wrapper)
+			fmt.Fprintln(file, wrapper.Data)
 			return c.JSON(http.StatusOK, resp)
 		}, apis.ActivityLogger(app))
 
@@ -156,8 +244,25 @@ func main() {
 	}
 
 }
-func printResponse(resp *genai.GenerateContentResponse) string {
-	text := ""
+func loadGemini(req string) *genai.GenerateContentResponse {
+	ctx := context.Background()
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+	client, err := genai.NewClient(ctx, option.WithAPIKey(os.Getenv("API_KEY")))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer client.Close()
+	model := client.GenerativeModel("gemini-pro")
+	resp, err := model.GenerateContent(ctx, genai.Text(req))
+	if err != nil {
+		log.Fatal(err)
+	}
+	return resp
+}
+func printResponse(resp *genai.GenerateContentResponse) {
 	for _, cand := range resp.Candidates {
 		if cand.Content != nil {
 			for _, part := range cand.Content.Parts {
@@ -165,7 +270,6 @@ func printResponse(resp *genai.GenerateContentResponse) string {
 			}
 		}
 	}
-	return text
 }
 
 // the default pb_public dir location is relative to the executable

@@ -1,0 +1,75 @@
+[
+	{
+		"id": "3oldx70btzzhwbii",
+		"name": "items",
+		"type": "base",
+		"system": false,
+		"schema": [
+			{
+				"system": false,
+				"id": "86km6r0j",
+				"name": "item_name",
+				"type": "text",
+				"required": true,
+				"presentable": true,
+				"unique": false,
+				"options": {}
+			},
+			{
+				"system": false,
+				"id": "oyskrg9q",
+				"name": "description",
+				"type": "text",
+				"required": false,
+				"presentable": true,
+				"unique": false,
+				"options": {}
+			},
+			{
+				"system": false,
+				"id": "b4n0fmlb",
+				"name": "quantity",
+				"type": "number",
+				"required": true,
+				"presentable": true,
+				"unique": false,
+				"options": {
+					"min": 0,
+					"max": null,
+					"noDecimal": false
+				}
+			},
+			{
+				"system": false,
+				"id": "l74moq4m",
+				"name": "price",
+				"type": "number",
+				"required": true,
+				"presentable": true,
+				"unique": false,
+				"options": {
+					"min": 0,
+					"max": null,
+					"noDecimal": false
+				}
+			},
+			{
+				"system": false,
+				"id": "8mkbwqiz",
+				"name": "available",
+				"type": "bool",
+				"required": true,
+				"presentable": true,
+				"unique": false,
+				"options": {}
+			}
+		],
+		"indexes": [],
+		"listRule": null,
+		"viewRule": null,
+		"createRule": null,
+		"updateRule": null,
+		"deleteRule": null,
+		"options": {}
+	}
+]
