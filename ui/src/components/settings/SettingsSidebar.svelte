@@ -39,6 +39,15 @@
             <i class="ri-archive-line" aria-hidden="true" />
             <span class="txt">Backups</span>
         </a>
+        <a
+            href="/settings/gemini"
+            class="sidebar-list-item"
+            use:active={{ path: "/settings/gemini/?.*" }}
+            use:link
+        >
+            <i class="ri-brain-line" aria-hidden="true" />
+            <span class="txt">Gemini AI</span>
+        </a>
 
         {#if !$hideControls}
             <div class="sidebar-title">
