@@ -167,7 +167,11 @@ func main() {
 				var val []byte = []byte("{\"data\":" + "Empty Request" + "}")
 				return c.JSONBlob(http.StatusBadRequest, val)
 			}
-			preReq := "you are a pocketbase json configuration generator, create the tables required for this system :  " + req + " below 280 len. The structure of the json should be like below, but please replace < > items with the tables or row accordingly: " + `
+			preReq := `you are a pocketbase JSON configuration generator, 
+			from now on, only output JSON without any backticks ('\n','\t',..) 
+			and whitespaces. Create the tables required for this system :  ` + req + ` below 280 len. 
+			The structure of the json should be like below, but please replace < > 
+			items with the tables or row accordingly: ` + `
 		[
 				{
 						"id" : "<Random 15 char length Id>",
@@ -179,7 +183,7 @@ func main() {
 								"system": false,
 								"id": "<Random 8 char length Id>",
 								"name": "<Row Name>",
-								"type": "text",
+								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
 								"required": false,
 								"presentable": false,
 								"unique": false,
@@ -191,9 +195,9 @@ func main() {
 							},
 							{
 								"system": false,
-								"id": "uduc0mdq",
+								"id": "<Random 8 char length Id>",
 								"name": "<Row Number>",
-								"type": "number",
+								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
 								"required": false,
 								"presentable": false,
 								"unique": false,
@@ -205,13 +209,116 @@ func main() {
 							},
 							{
 								"system": false,
-								"id": "yt9ccbml",
+								"id": "<Random 8 char length Id>",
 								"name": "<Row Boolean>",
-								"type": "bool",
+								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
 								"required": false,
 								"presentable": false,
 								"unique": false,
 								"options": {}
+							},
+							{
+								"system": false,
+								"id": "<Random 8 char length Id>",
+								"name": "editor",
+								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
+								"required": false,
+								"presentable": false,
+								"unique": false,
+								"options": {
+									"convertUrls": false
+								}
+							},
+							{
+								"system": false,
+								"id": "<Random 8 char length Id>",
+								"name": "email",
+								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
+								"required": false,
+								"presentable": false,
+								"unique": false,
+								"options": {
+									"exceptDomains": null,
+									"onlyDomains": null
+								}
+							},
+							{
+								"system": false,
+								"id": "<Random 8 char length Id>",
+								"name": "url",
+								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
+								"required": false,
+								"presentable": false,
+								"unique": false,
+								"options": {
+									"exceptDomains": null,
+									"onlyDomains": null
+								}
+							},
+							{
+								"system": false,
+								"id": "<Random 8 char length Id>",
+								"name": "date",
+								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
+								"required": false,
+								"presentable": false,
+								"unique": false,
+								"options": {
+									"min": "",
+									"max": ""
+								}
+							},
+							{
+								"system": false,
+								"id": "<Random 8 char length Id>",
+								"name": "gender",
+								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
+								"required": false,
+								"presentable": false,
+								"unique": false,
+								"options": {
+									"maxSelect": 1,
+									"values": [
+										"male",
+										"female"
+									]
+								}
+							},
+							{
+								"system": false,
+								"id": "<Random 8 char length Id>",
+								"name": "file",
+								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
+								"required": false,
+								"presentable": false,
+								"unique": false,
+								"options": <if type json , use '"maxSize": 2000000' else use '{}> 
+							},
+							{
+								"system": false,
+								"id": "<Random 8 char length Id>",
+								"name": "relation",
+								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
+								"required": false,
+								"presentable": false,
+								"unique": false,
+								"options": {
+									"collectionId": "<Table Id of the related table>",
+									"cascadeDelete": false,
+									"minSelect": null,
+									"maxSelect": 1,
+									"displayFields": null
+								}
+							},
+							{
+								"system": false,
+								"id": ""<Random 8 char length Id>",
+								"name": "jsonObj",
+								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
+								"required": false,
+								"presentable": false,
+								"unique": false,
+								"options": <if type json , use '"maxSize": 2000000' else use '{}>
 							}
 						],
 						"indexes": [],

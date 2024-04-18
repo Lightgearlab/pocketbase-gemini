@@ -27,6 +27,18 @@
     let isLoading = false;
     let isSaving = false;
     let initialHash = "";
+    let menuOpen = false;
+    let inputValue = "";
+    $: console.log(inputValue);
+
+    const menuItems = ["Gemini", "ChatGPT"];
+    let filteredItems = [];
+
+    const handleInput = () => {
+        return (filteredItems = menuItems.filter((item) =>
+            item.toLowerCase().match(inputValue.toLowerCase()),
+        ));
+    };
 
     $: initialHash = JSON.stringify(originalFormSettings);
 
@@ -108,9 +120,12 @@
 
     <div class="wrapper">
         <form class="panel" autocomplete="off">
-            <div class="flex m-b-sm flex-gap-10">
-                <span class="txt-xl">JSON Generator</span>
+            <div class="column">
+                <div class="flex m-b-sm flex-gap-10">
+                    <span class="txt-xl">JSON Generator</span>
+                </div>
             </div>
+
             <div class="row" style="text-align: right;">
                 <Field class="form-field required" name="meta.text" let:uniqueId>
                     <label for={uniqueId}>System</label>
@@ -168,3 +183,24 @@
         </form>
     </div>
 </PageWrapper>
+
+<style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f6f6f6;
+        min-width: 230px;
+        border: 1px solid #ddd;
+        z-index: 1;
+    }
+
+    /* Show the dropdown menu */
+    .show {
+        display: block;
+    }
+</style>

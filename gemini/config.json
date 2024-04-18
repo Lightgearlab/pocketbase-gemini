@@ -1,275 +1,257 @@
 [
 	{
-		"id":"9n1lbzzu3p7d8agk",
-		"name":"patients",
-		"type":"base",
-		"system":false,
-		"schema":[
+		"id": "7k3b891wvb7hvw",
+		"name": "patients",
+		"type": "base",
+		"system": false,
+		"schema": [
 			{
-				"system":false,
-				"id":"hm108427",
-				"name":"name",
-				"type":"text",
-				"required":true,
-				"presentable":true,
-				"unique":true,
-				"options":{
-					"min":1,
-					"max":255,
-					"pattern":""
+				"system": false,
+				"id": "9f36fg3w",
+				"name": "name",
+				"type": "text",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {}
+			},
+			{
+				"system": false,
+				"id": "222d8b12",
+				"name": "age",
+				"type": "number",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {
+					"min": null,
+					"max": null,
+					"noDecimal": false
 				}
 			},
 			{
-				"system":false,
-				"id":"4t6f7q9i",
-				"name":"age",
-				"type":"number",
-				"required":true,
-				"presentable":true,
-				"unique":false,
-				"options":{
-					"min":0,
-					"max":120,
-					"noDecimal":false
+				"system": false,
+				"id": "fg1q2w3e",
+				"name": "gender",
+				"type": "select",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {
+					"maxSelect": 1,
+					"values": [
+						"male",
+						"female"
+					]
 				}
 			},
 			{
-				"system":false,
-				"id":"sj7g9hvo",
-				"name":"gender",
-				"type":"text",
-				"required":true,
-				"presentable":true,
-				"unique":false,
-				"options":{
-					"min":1,
-					"max":10,
-					"pattern":""
+				"system": false,
+				"id": "u437891w",
+				"name": "address",
+				"type": "text",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {}
+			},
+			{
+				"system": false,
+				"id": "8166c76s",
+				"name": "phone",
+				"type": "text",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {}
+			},
+			{
+				"system": false,
+				"id": "3w7h7sh2",
+				"name": "medical_history",
+				"type": "json",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {
+					"maxSize": 2000000
 				}
 			},
 			{
-				"system":false,
-				"id":"30pjuhxm",
-				"name":"address",
-				"type":"text",
-				"required":true,
-				"presentable":true,
-				"unique":false,
-				"options":{
-					"min":1,
-					"max":255,
-					"pattern":""
-				}
-			},
-			{
-				"system":false,
-				"id":"j65e5fby",
-				"name":"phone",
-				"type":"text",
-				"required":true,
-				"presentable":true,
-				"unique":true,
-				"options":{
-					"min":10,
-					"max":15,
-					"pattern":"\\+[0-9]{2}-[0-9]{10}"
-				}
-			},
-			{
-				"system":false,
-				"id":"9i3vwxnx",
-				"name":"email",
-				"type":"text",
-				"required":true,
-				"presentable":true,
-				"unique":true,
-				"options":{
-					"min":1,
-					"max":255,
-					"pattern":"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
-				}
-			},
-			{
-				"system":false,
-				"id":"07e086mn",
-				"name":"bloodgroup",
-				"type":"text",
-				"required":true,
-				"presentable":true,
-				"unique":false,
-				"options":{
-					"min":2,
-					"max":3,
-					"pattern":""
-				}
-			},
-			{
-				"system":false,
-				"id":"48wv89ru",
-				"name":"allergies",
-				"type":"text",
-				"required":false,
-				"presentable":true,
-				"unique":false,
-				"options":{
-					"min":0,
-					"max":255,
-					"pattern":""
-				}
-			},
-			{
-				"system":false,
-				"id":"1794v13p",
-				"name":"medications",
-				"type":"text",
-				"required":false,
-				"presentable":true,
-				"unique":false,
-				"options":{
-					"min":0,
-					"max":255,
-					"pattern":""
-				}
-			},
-			{
-				"system":false,
-				"id":"ajx879ni",
-				"name":"notes",
-				"type":"text",
-				"required":false,
-				"presentable":true,
-				"unique":false,
-				"options":{
-					"min":0,
-					"max":255,
-					"pattern":""
+				"system": false,
+				"id": "gfg2h3w4",
+				"name": "allergies",
+				"type": "json",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {
+					"maxSize": 2000000
 				}
 			}
-		],
-		"indexes":[],
-		"listRule":null,
-		"viewRule":null,
-		"createRule":null,
-		"updateRule":null,
-		"deleteRule":null,
-		"options":{}
+		]
 	},
 	{
-		"id":"083h68232dg8ea",
-		"name":"doctors",
-		"type":"base",
-		"system":false,
-		"schema":[
+		"id": "i478236jfs9hf",
+		"name": "doctors",
+		"type": "base",
+		"system": false,
+		"schema": [
 			{
-				"system":false,
-				"id":"2sjy4qgo",
-				"name":"name",
-				"type":"text",
-				"required":true,
-				"presentable":true,
-				"unique":true,
-				"options":{
-					"min":1,
-					"max":255,
-					"pattern":""
+				"system": false,
+				"id": "gfe54323",
+				"name": "name",
+				"type": "text",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {}
+			},
+			{
+				"system": false,
+				"id": "42423634",
+				"name": "specialization",
+				"type": "text",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {}
+			},
+			{
+				"system": false,
+				"id": "ewf26354",
+				"name": "experience",
+				"type": "number",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {
+					"min": null,
+					"max": null,
+					"noDecimal": false
 				}
 			},
 			{
-				"system":false,
-				"id":"012b9y2x",
-				"name":"age",
-				"type":"number",
-				"required":true,
-				"presentable":true,
-				"unique":false,
-				"options":{
-					"min":18,
-					"max":120,
-					"noDecimal":false
-				}
+				"system": false,
+				"id": "u437891w",
+				"name": "address",
+				"type": "text",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {}
 			},
 			{
-				"system":false,
-				"id":"dbp54wn2",
-				"name":"gender",
-				"type":"text",
-				"required":true,
-				"presentable":true,
-				"unique":false,
-				"options":{
-					"min":1,
-					"max":10,
-					"pattern":""
-				}
+				"system": false,
+				"id": "8166c76s",
+				"name": "phone",
+				"type": "text",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {}
 			},
 			{
-				"system":false,
-				"id":"8f4u7z8s",
-				"name":"specialization",
-				"type":"text",
-				"required":true,
-				"presentable":true,
-				"unique":false,
-				"options":{
-					"min":1,
-					"max":255,
-					"pattern":""
-				}
-			},
-			{
-				"system":false,
-				"id":"1t253m8n",
-				"name":"experience",
-				"type":"number",
-				"required":true,
-				"presentable":true,
-				"unique":false,
-				"options":{
-					"min":0,
-					"max":100,
-					"noDecimal":false
-				}
-			},
-			{
-				"system":false,
-				"id":"p3ei9g4i",
-				"name":"phone",
-				"type":"text",
-				"required":true,
-				"presentable":true,
-				"unique":true,
-				"options":{
-					"min":10,
-					"max":15,
-					"pattern":"\\+[0-9]{2}-[0-9]{10}"
-				}
-			},
-			{
-				"system":false,
-				"id":"2cj0z7mj",
-				"name":"email",
-				"type":"text",
-				"required":true,
-				"presentable":true,
-				"unique":true,
-				"options":{
-					"min":1,
-					"max":255,
-					"pattern":"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+				"system": false,
+				"id": "y6732uy4",
+				"name": "patients",
+				"type": "relation",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {
+					"collectionId": "7k3b891wvb7hvw",
+					"cascadeDelete": false,
+					"minSelect": null,
+					"maxSelect": 1,
+					"displayFields": null
 				}
 			}
-		],
-		"indexes":[],
-		"listRule":null,
-		"viewRule":null,
-		"createRule":null,
-		"updateRule":null,
-		"deleteRule":null,
-		"options":{}
+		]
 	},
 	{
-		"id":"f5f77853bh2989",
-		"name":"appointments",
-		"type":"base",
-		"system":false,
-		"schema":[
+		"id": "4654156ygh",
+		"name": "appointments",
+		"type": "base",
+		"system": false,
+		"schema": [
+			{
+				"system": false,
+				"id": "333d8b12",
+				"name": "patient_id",
+				"type": "relation",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {
+					"collectionId": "7k3b891wvb7hvw",
+					"cascadeDelete": false,
+					"minSelect": null,
+					"maxSelect": 1,
+					"displayFields": null
+				}
+			},
+			{
+				"system": false,
+				"id": "sdfs1234",
+				"name": "doctor_id",
+				"type": "relation",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {
+					"collectionId": "i478236jfs9hf",
+					"cascadeDelete": false,
+					"minSelect": null,
+					"maxSelect": 1,
+					"displayFields": null
+				}
+			},
+			{
+				"system": false,
+				"id": "3gh34545",
+				"name": "date",
+				"type": "date",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {
+					"min": null,
+					"max": null
+				}
+			},
+			{
+				"system": false,
+				"id": "u437891w",
+				"name": "time",
+				"type": "text",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {}
+			},
+			{
+				"system": false,
+				"id": "8166c76s",
+				"name": "status",
+				"type": "text",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {}
+			},
+			{
+				"system": false,
+				"id": "y6732uy4",
+				"name": "notes",
+				"type": "editor",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {
+					"convertUrls": false
+				}
+			}
+		]
+	}
+]
