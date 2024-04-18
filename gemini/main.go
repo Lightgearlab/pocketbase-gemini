@@ -163,26 +163,35 @@ func main() {
 				return c.JSON(http.StatusBadRequest, err)
 			}
 			req := jsonBody["req"].(string)
+			maxTable := strconv.FormatFloat(jsonBody["maxtable"].(float64), 'E', -1, 64)
+			maxRow := strconv.FormatFloat(jsonBody["maxrow"].(float64), 'E', -1, 64)
 			if req == "" {
 				var val []byte = []byte("{\"data\":" + "Empty Request" + "}")
 				return c.JSONBlob(http.StatusBadRequest, val)
 			}
+			/*
+				` + req + ` with ` + maxTable + ` tables max and ` + maxRow + ` rows max each.
+				Please name each table and row based on the appropriate system name.
+			*/
 			preReq := `you are a pocketbase JSON configuration generator, 
 			from now on, only output JSON without any backticks ('\n','\t',..) 
-			and whitespaces. Create the tables required for this system :  ` + req + ` below 280 len. 
-			The structure of the json should be like below, but please replace < > 
-			items with the tables or row accordingly: ` + `
+			and whitespaces. Create the tables required for this system :
+			` + req + ` .
+			The total table count is strictly ` + maxTable + `, and the total row count is strictly ` + maxRow + `.
+			Total character count should be below 6000 characters.
+			The structure of the json should be like below, and the type of table and row,
+			 use as needed but please replace < > items with the tables or row accordingly: ` + `
 		[
 				{
 						"id" : "<Random 15 char length Id>",
-						"name": "<Table Name>",
+						"name": "<Table Name, dont use reserved name such as name>",
 						"type": "<If need login, use 'auth', if not 'base' >",
 						"system": false,
 						"schema": [
 							{
 								"system": false,
 								"id": "<Random 8 char length Id>",
-								"name": "<Row Name>",
+								"name": "<Row Name , make the name [row]_name >",
 								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
 								"required": false,
 								"presentable": false,
@@ -196,7 +205,7 @@ func main() {
 							{
 								"system": false,
 								"id": "<Random 8 char length Id>",
-								"name": "<Row Number>",
+								"name": "<Row Number , make the name [row]_number>",
 								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
 								"required": false,
 								"presentable": false,
@@ -210,7 +219,7 @@ func main() {
 							{
 								"system": false,
 								"id": "<Random 8 char length Id>",
-								"name": "<Row Boolean>",
+								"name": "<Row Boolean , make the name [row]_bool>",
 								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
 								"required": false,
 								"presentable": false,
@@ -220,7 +229,7 @@ func main() {
 							{
 								"system": false,
 								"id": "<Random 8 char length Id>",
-								"name": "editor",
+								"name": "<Row Editor , make the name [row]_editor>",
 								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
 								"required": false,
 								"presentable": false,
@@ -232,7 +241,7 @@ func main() {
 							{
 								"system": false,
 								"id": "<Random 8 char length Id>",
-								"name": "email",
+								"name": "<Row Email , make the name [row]_email>",
 								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
 								"required": false,
 								"presentable": false,
@@ -245,7 +254,7 @@ func main() {
 							{
 								"system": false,
 								"id": "<Random 8 char length Id>",
-								"name": "url",
+								"name": "<Row Url , make the name [row]_url>",
 								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
 								"required": false,
 								"presentable": false,
@@ -258,7 +267,7 @@ func main() {
 							{
 								"system": false,
 								"id": "<Random 8 char length Id>",
-								"name": "date",
+								"name": "<Row Date , make the name [row]_date>",
 								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
 								"required": false,
 								"presentable": false,
@@ -271,7 +280,7 @@ func main() {
 							{
 								"system": false,
 								"id": "<Random 8 char length Id>",
-								"name": "gender",
+								"name": "<Row Select , make the name [row]_select>",
 								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
 								"required": false,
 								"presentable": false,
@@ -287,17 +296,17 @@ func main() {
 							{
 								"system": false,
 								"id": "<Random 8 char length Id>",
-								"name": "file",
+								"name": "<Row File , make the name [row]_file>",
 								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
 								"required": false,
 								"presentable": false,
 								"unique": false,
-								"options": <if type json , use '"maxSize": 2000000' else use '{}> 
+								"options": <if type json , use '"maxSize": 2000000' else use '{}'> 
 							},
 							{
 								"system": false,
 								"id": "<Random 8 char length Id>",
-								"name": "relation",
+								"name": "<Row Relation , make the name [row]_relation>",
 								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
 								"required": false,
 								"presentable": false,
@@ -313,12 +322,12 @@ func main() {
 							{
 								"system": false,
 								"id": ""<Random 8 char length Id>",
-								"name": "jsonObj",
+								"name": "<Row Json , make the name [row]_json>",
 								"type": "<text or number or bool or email or url or editor or date or select or json or file or relation>",
 								"required": false,
 								"presentable": false,
 								"unique": false,
-								"options": <if type json , use '"maxSize": 2000000' else use '{}>
+								"options": <if type json , use '"maxSize": 2000000' else use '{}'>
 							}
 						],
 						"indexes": [],
@@ -338,7 +347,7 @@ func main() {
 									"requireEmail": false', else use '{}'>
 					}
 		]
-. Please remove json keyword in the beginning. Please use lowercase for table name and row name. Remove all whitespace.
+. Please remove json keyword in the beginning. Please use lowercase for table name and row name. Remove all whitespace. Do not use markdown.
 
 			`
 			resp := loadGemini(preReq)

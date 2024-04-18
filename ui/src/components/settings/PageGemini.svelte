@@ -22,6 +22,8 @@
     let formSettings = {};
     let formText = "";
     let formSystemText = "";
+    let formMaxTable = 4.0;
+    let formMaxRow = 5.0;
     let resultText = "";
     let resultSystemText = "";
     let isLoading = false;
@@ -59,19 +61,19 @@
         isLoading = false;
     }
 
-    async function systemConfig(text) {
+    async function systemConfig(text, maxtable, maxrow) {
         isSaving = true;
         try {
             const res = await fetch("http://127.0.0.1:8090/gemini", {
                 method: "POST",
                 body: JSON.stringify({
                     req: text,
+                    maxtable,
+                    maxrow,
                 }),
             });
             const json = await res.json();
             console.log(json);
-            // var data = json["Da"];
-            // console.log(data);
             resultSystemText = json;
             addSuccessToast("created json config file config.json");
         } catch (err) {
@@ -131,12 +133,20 @@
                     <label for={uniqueId}>System</label>
                     <input type="text" id={uniqueId} required bind:value={formSystemText} />
                 </Field>
+                <Field class="form-field required" name="meta.maxtable" let:uniqueId>
+                    <label for={uniqueId}>Max Table</label>
+                    <input type="text" id={uniqueId} required bind:value={formMaxTable} />
+                </Field>
+                <Field class="form-field required" name="meta.maxrow" let:uniqueId>
+                    <label for={uniqueId}>Max Row</label>
+                    <input type="text" id={uniqueId} required bind:value={formMaxRow} />
+                </Field>
                 <button
                     type="submit"
                     class:btn-loading={isSaving}
                     disabled={isSaving}
                     class="btn btn-secondary"
-                    on:click={() => systemConfig(formSystemText)}
+                    on:click={() => systemConfig(formSystemText, formMaxTable, formMaxRow)}
                 >
                     <span class="txt">Create</span>
                 </button>

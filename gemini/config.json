@@ -1,257 +1,319 @@
 [
-	{
-		"id": "7k3b891wvb7hvw",
-		"name": "patients",
-		"type": "base",
-		"system": false,
-		"schema": [
-			{
-				"system": false,
-				"id": "9f36fg3w",
-				"name": "name",
-				"type": "text",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {}
-			},
-			{
-				"system": false,
-				"id": "222d8b12",
-				"name": "age",
-				"type": "number",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {
-					"min": null,
-					"max": null,
-					"noDecimal": false
-				}
-			},
-			{
-				"system": false,
-				"id": "fg1q2w3e",
-				"name": "gender",
-				"type": "select",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {
-					"maxSelect": 1,
-					"values": [
-						"male",
-						"female"
-					]
-				}
-			},
-			{
-				"system": false,
-				"id": "u437891w",
-				"name": "address",
-				"type": "text",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {}
-			},
-			{
-				"system": false,
-				"id": "8166c76s",
-				"name": "phone",
-				"type": "text",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {}
-			},
-			{
-				"system": false,
-				"id": "3w7h7sh2",
-				"name": "medical_history",
-				"type": "json",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {
-					"maxSize": 2000000
-				}
-			},
-			{
-				"system": false,
-				"id": "gfg2h3w4",
-				"name": "allergies",
-				"type": "json",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {
-					"maxSize": 2000000
-				}
-			}
-		]
-	},
-	{
-		"id": "i478236jfs9hf",
-		"name": "doctors",
-		"type": "base",
-		"system": false,
-		"schema": [
-			{
-				"system": false,
-				"id": "gfe54323",
-				"name": "name",
-				"type": "text",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {}
-			},
-			{
-				"system": false,
-				"id": "42423634",
-				"name": "specialization",
-				"type": "text",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {}
-			},
-			{
-				"system": false,
-				"id": "ewf26354",
-				"name": "experience",
-				"type": "number",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {
-					"min": null,
-					"max": null,
-					"noDecimal": false
-				}
-			},
-			{
-				"system": false,
-				"id": "u437891w",
-				"name": "address",
-				"type": "text",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {}
-			},
-			{
-				"system": false,
-				"id": "8166c76s",
-				"name": "phone",
-				"type": "text",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {}
-			},
-			{
-				"system": false,
-				"id": "y6732uy4",
-				"name": "patients",
-				"type": "relation",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {
-					"collectionId": "7k3b891wvb7hvw",
-					"cascadeDelete": false,
-					"minSelect": null,
-					"maxSelect": 1,
-					"displayFields": null
-				}
-			}
-		]
-	},
-	{
-		"id": "4654156ygh",
-		"name": "appointments",
-		"type": "base",
-		"system": false,
-		"schema": [
-			{
-				"system": false,
-				"id": "333d8b12",
-				"name": "patient_id",
-				"type": "relation",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {
-					"collectionId": "7k3b891wvb7hvw",
-					"cascadeDelete": false,
-					"minSelect": null,
-					"maxSelect": 1,
-					"displayFields": null
-				}
-			},
-			{
-				"system": false,
-				"id": "sdfs1234",
-				"name": "doctor_id",
-				"type": "relation",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {
-					"collectionId": "i478236jfs9hf",
-					"cascadeDelete": false,
-					"minSelect": null,
-					"maxSelect": 1,
-					"displayFields": null
-				}
-			},
-			{
-				"system": false,
-				"id": "3gh34545",
-				"name": "date",
-				"type": "date",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {
-					"min": null,
-					"max": null
-				}
-			},
-			{
-				"system": false,
-				"id": "u437891w",
-				"name": "time",
-				"type": "text",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {}
-			},
-			{
-				"system": false,
-				"id": "8166c76s",
-				"name": "status",
-				"type": "text",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {}
-			},
-			{
-				"system": false,
-				"id": "y6732uy4",
-				"name": "notes",
-				"type": "editor",
-				"required": false,
-				"presentable": false,
-				"unique": false,
-				"options": {
-					"convertUrls": false
-				}
-			}
-		]
-	}
+    {
+        "id": "61sCm98n0S",
+        "name": "hospitals",
+        "type": "base",
+        "system": false,
+        "schema": [
+            {
+                "system": false,
+                "id": "rH825N9A",
+                "name": "hospital_name",
+                "type": "text",
+                "required": true,
+                "presentable": false,
+                "unique": false,
+                "options": {}
+            },
+            {
+                "system": false,
+                "id": "h5e369gE",
+                "name": "hospital_number",
+                "type": "number",
+                "required": true,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "noDecimal": true
+                }
+            },
+            {
+                "system": false,
+                "id": "j7nZ92E4",
+                "name": "hospital_email",
+                "type": "email",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "exceptDomains": null,
+                    "onlyDomains": null
+                }
+            },
+            {
+                "system": false,
+                "id": "SDJ02304",
+                "name": "hospital_url",
+                "type": "url",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "exceptDomains": null,
+                    "onlyDomains": null
+                }
+            },
+            {
+                "system": false,
+                "id": "sE69M504",
+                "name": "hospital_address",
+                "type": "editor",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "convertUrls": false
+                }
+            },
+            {
+                "system": false,
+                "id": "Me56K184",
+                "name": "hospital_phone",
+                "type": "text",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {}
+            },
+            {
+                "system": false,
+                "id": "ZA962184",
+                "name": "hospital_image",
+                "type": "file",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "maxSize": 2000000
+                }
+            },
+            {
+                "system": false,
+                "id": "c3fbc2dx",
+                "name": "hospital_relation",
+                "type": "relation",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "collectionId": "c431628044",
+                    "cascadeDelete": false,
+                    "minSelect": null,
+                    "maxSelect": 1,
+                    "displayFields": null
+                }
+            }
+        ],
+        "indexes": [],
+        "listRule": null,
+        "viewRule": null,
+        "createRule": null,
+        "updateRule": null,
+        "deleteRule": null,
+        "options": {}
+    },
+    {
+        "id": "c431628044",
+        "name": "doctors",
+        "type": "base",
+        "system": false,
+        "schema": [
+            {
+                "system": false,
+                "id": "RY794184",
+                "name": "doctor_name",
+                "type": "text",
+                "required": true,
+                "presentable": false,
+                "unique": false,
+                "options": {}
+            },
+            {
+                "system": false,
+                "id": "k9H94184",
+                "name": "doctor_number",
+                "type": "number",
+                "required": true,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "noDecimal": true
+                }
+            },
+            {
+                "system": false,
+                "id": "se974184",
+                "name": "doctor_email",
+                "type": "email",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "exceptDomains": null,
+                    "onlyDomains": null
+                }
+            },
+            {
+                "system": false,
+                "id": "JR812304",
+                "name": "doctor_phone",
+                "type": "text",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {}
+            },
+            {
+                "system": false,
+                "id": "gm730184",
+                "name": "doctor_address",
+                "type": "editor",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "convertUrls": false
+                }
+            },
+            {
+                "system": false,
+                "id": "ml180184",
+                "name": "doctor_hospital",
+                "type": "relation",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "collectionId": "h783192770",
+                    "cascadeDelete": false,
+                    "minSelect": null,
+                    "maxSelect": 1,
+                    "displayFields": null
+                }
+            }
+        ],
+        "indexes": [],
+        "listRule": null,
+        "viewRule": null,
+        "createRule": null,
+        "updateRule": null,
+        "deleteRule": null,
+        "options": {}
+    },
+    {
+        "id": "h783192770",
+        "name": "patients",
+        "type": "base",
+        "system": false,
+        "schema": [
+            {
+                "system": false,
+                "id": "um014284",
+                "name": "patient_name",
+                "type": "text",
+                "required": true,
+                "presentable": false,
+                "unique": false,
+                "options": {}
+            },
+            {
+                "system": false,
+                "id": "k7811184",
+                "name": "patient_number",
+                "type": "number",
+                "required": true,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "noDecimal": true
+                }
+            },
+            {
+                "system": false,
+                "id": "z8923184",
+                "name": "patient_email",
+                "type": "email",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "exceptDomains": null,
+                    "onlyDomains": null
+                }
+            },
+            {
+                "system": false,
+                "id": "JQ183284",
+                "name": "patient_phone",
+                "type": "text",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {}
+            },
+            {
+                "system": false,
+                "id": "m0014284",
+                "name": "patient_address",
+                "type": "editor",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "convertUrls": false
+                }
+            },
+            {
+                "system": false,
+                "id": "z1714284",
+                "name": "patient_doctor",
+                "type": "relation",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "collectionId": "c431628044",
+                    "cascadeDelete": false,
+                    "minSelect": null,
+                    "maxSelect": 1,
+                    "displayFields": null
+                }
+            },
+            {
+                "system": false,
+                "id": "Bl714284",
+                "name": "patient_hospital",
+                "type": "relation",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "collectionId": "61sCm98n0S",
+                    "cascadeDelete": false,
+                    "minSelect": null,
+                    "maxSelect": 1,
+                    "displayFields": null
+                }
+            },
+            {
+                "system": false,
+                "id": "Bj114284",
+                "name": "patient_medical_history",
+                "type": "json",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "maxSize": 2000000
+                }
+            }
+        ],
+        "indexes": [],
+        "listRule": null,
+        "viewRule": null,
+        "createRule": null,
+        "updateRule": null,
+        "deleteRule": null,
+        "options": {}
+    }
 ]
