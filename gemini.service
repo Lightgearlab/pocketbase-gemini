@@ -1,0 +1,16 @@
+[Unit]
+Description = gemini
+
+[Service]
+Type           = simple
+User           = root
+Group          = root
+LimitNOFILE    = 4096
+Restart        = always
+RestartSec     = 5s
+StandardOutput = append:/root/gemini/log.log
+StandardError  = append:/root/gemini/errors.log
+ExecStart      = /root/gemini/gemini serve --http="127.0.0.1:4000"
+
+[Install]
+WantedBy = multi-user.target

@@ -1,0 +1,16 @@
+[Unit]
+Description = pocketbase
+
+[Service]
+Type           = simple
+User           = root
+Group          = root
+LimitNOFILE    = 4096
+Restart        = always
+RestartSec     = 5s
+StandardOutput = append:/root/errors.log
+StandardError  = append:/root/errors.log
+ExecStart      = /root/server serve --http="139.162.35.58:8090"
+
+[Install]
+WantedBy = multi-user.target
